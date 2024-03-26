@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from '../user/UserSlice';
 import { useNavigate } from 'react-router';
+import Loader from '../components/Loader';
 
 
 
@@ -11,6 +12,7 @@ const Profile = ()=>{
     const navigate = useNavigate();
     const [mobile, setMobile] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleMobile = (e)=>{
         setMobile(e.target.value);
@@ -20,12 +22,16 @@ const Profile = ()=>{
     }
 
     const submit = ()=>{
+        setLoading(true);
         console.log(mobile,password);
         axios.post('http://127.0.0.1:8626/api/login',{mobile:mobile,password:password}).then((res)=>{
             console.log(res);
-            dispatch(login(res.data));
+            dispatch(login(res.data.user));
             localStorage.setItem('userData',JSON.stringify(res.data[0]));
-            navigate('/');
+            if(res.data.status===true){
+                navigate('/');
+            }
+            setLoading(false);
         }).catch((err)=>{
             console.log(err);
         });
@@ -40,6 +46,7 @@ const Profile = ()=>{
                 <input type="password" onChange={(e)=>handlePassword(e)} name='password' value={password} />
                 <button type='submit' onClick={submit}>Login</button>
             </div>
+            <Loader status={loading}/>
         </>
     );
 };

@@ -13,9 +13,9 @@ function App() {
         if(userData!=null){
             dispatch(login(userData));
         }else{
-          console.log('asjadj');
+          console.log('Not logged in');
         }
-    },[]);
+    });
   return (
     <Base/>
   );

@@ -3,9 +3,6 @@ import Header from "../components/Header";
 import Search from "./Search";
 import Home from "./Home";
 import Profile from "./Profile";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { login } from "../user/UserSlice";
 
 
 const Base = ()=>{

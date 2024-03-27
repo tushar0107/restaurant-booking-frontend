@@ -26,10 +26,14 @@ const Profile = ()=>{
         console.log(mobile,password);
         axios.post('http://127.0.0.1:8626/api/login',{mobile:mobile,password:password}).then((res)=>{
             console.log(res);
-            dispatch(login(res.data.user));
-            localStorage.setItem('userData',JSON.stringify(res.data[0]));
             if(res.data.status===true){
-                navigate('/');
+                dispatch(login(res.data.user));
+                localStorage.setItem('userData',JSON.stringify(res.data.user));
+                if(res.data.status===true){
+                    navigate('/');
+                }
+            }else{
+                alert(res.data.message);
             }
             setLoading(false);
         }).catch((err)=>{

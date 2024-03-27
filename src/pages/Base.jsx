@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Search from "./Search";
 import Home from "./Home";
 import Profile from "./Profile";
+import { Restaurant } from "./Restaurant";
 
 
 const Base = ()=>{
@@ -14,6 +15,7 @@ const Base = ()=>{
                 <Route path='/' element={<Home/>}></Route>
                 <Route path='/search' element={<Search/>}></Route>
                 <Route path='/profile' element={<Profile/>}></Route>
+                <Route path='/restaurant/:id' element={<Restaurant/>}></Route>
             </Routes>
         </>
     );

@@ -6,7 +6,7 @@ const Header = () => {
   const user = useSelector((state)=>state.user);
   return (
       <div id="header">
-        <div>
+        <div className="logo">
           {(user.value?.first_name || "") + " " + (user.value?.last_name || "")}
         </div>
         <nav>

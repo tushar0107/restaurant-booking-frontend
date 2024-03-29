@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Loader from '../components/Loader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBowlRice, faUtensils } from '@fortawesome/free-solid-svg-icons';
+import apiUrl from '../Vars';
 
 
 const Search = ()=>{
@@ -59,7 +60,7 @@ const Search = ()=>{
         console.log(formData);
         setLoading(true);
 
-        axios.post('http://127.0.0.1:8626/api/restaurants',{...formData}).then((res)=>{
+        axios.post(`${apiUrl}/api/restaurants`,{...formData}).then((res)=>{
             console.log(res.data);
             if(res.data.length!==0){
                 setRestaurants(res.data.data);
@@ -68,18 +69,17 @@ const Search = ()=>{
         }).catch(err=>{
             setLoading(false);
             console.log('Search Error: ',err);
-            alert(err.message);
+            alert(err);
         });
     }
 
     return (
       <>
-        <Loader status={loading}/>
-
+        
         <div id="search-container">
             <div id="search-bar">
-                <input type="search" name='name' value={name} onChange={(e)=>handleSearchInput(e)} placeholder="Search by restaurants..." ></input>
-                <input type="search" name='city' value={city} onChange={(e)=>handleSearchInput(e)} placeholder="Search by city..." ></input>
+                <input type="search" name='name' id="name" value={name} onChange={(e)=>handleSearchInput(e)} placeholder="Search by restaurants..." ></input>
+                <input type="search" name='city' id="city" value={city} onChange={(e)=>handleSearchInput(e)} placeholder="Search by city..." ></input>
             </div>
             <span className='light-icon'><FontAwesomeIcon icon={faBowlRice}/></span>
             <span className='option-button'><input type="radio" id='veg' name="food-type" onChange={(e)=>{handleSearchInput(e)}} value="veg" ></input><label htmlFor="veg"> Veg</label></span>
@@ -92,30 +92,31 @@ const Search = ()=>{
             <span className='option-button'><input type="radio" id='table-capacity-30' name='table-capacity' onChange={(e)=>{handleSearchInput(e)}} value="30" ></input><label htmlFor="table-capacity-30">&gt;30</label></span>
             <br />{/* <input type="text" name='ethnicity' className='search-input-box' value={ethnicity} onChange={(e)=>handleSearchInput(e)} placeholder="Type of restaurant" ></input> */}
             <span className='light-icon'><FontAwesomeIcon icon={faUtensils}/> </span>
-            <span className='option-button'><input type="radio" id='service-cafe' name='service-type' onChange={(e)=>{handleSearchInput(e)}} value="cafe" ></input><label htmlFor="service-cafe">Cafe</label></span>
-            <span className='option-button'><input type="radio" id='service-dining' name='service-type' onChange={(e)=>{handleSearchInput(e)}} value="dining" ></input><label htmlFor="service-dining">Dining</label></span>
-            <span className='option-button'><input type="radio" id='service-restaurant' name='service-type' onChange={(e)=>{handleSearchInput(e)}} value="family restaurant" ></input><label htmlFor="service-restaurant">Family Restaurant</label></span>
-            <br /><button onClick={searchOutput}> Search</button>
-        
+            <span className='option-button'><input type="radio" id='service-cafe' name='service-type' onChange={(e)=>{handleSearchInput(e)}} value="Cafe" ></input><label htmlFor="service-cafe">Cafe</label></span>
+            <span className='option-button'><input type="radio" id='service-dining' name='service-type' onChange={(e)=>{handleSearchInput(e)}} value="Dinner" ></input><label htmlFor="service-dining">Dining</label></span>
+            <span className='option-button'><input type="radio" id='service-restaurant' name='service-type' onChange={(e)=>{handleSearchInput(e)}} value="Family Restaurant" ></input><label htmlFor="service-restaurant">Family Restaurant</label></span>
+            <br /><button className='submit-btn' onClick={searchOutput}> Search</button>
         </div>
-        
-        <div id="search-results-container">
-            {
-                Array.isArray(restaurants) ? restaurants.map((ele,key)=>{
-                    return(                    
-                        <Link to={`/restaurant/${ele.id}`} className="restaurant-card" key={key}>
-                            <div className="restro-img"><img src="../../logo192.png" alt="" /></div>
-                            <div className="restro-details">
-                                <span className="restaurant-name"><strong>{ele.name || 'Name'}</strong></span><br />
-                                <span className="address">{ele.address || 'address'}, {ele.city ||'city'}, {ele.state || 'State'}</span><br />
-                                <span className='light-icon'><FontAwesomeIcon icon={faUtensils}/> {ele.service_type}</span>
-                                <br /><span className='light-icon'><span className="light-icon"><FontAwesomeIcon icon={faBowlRice}/> </span>{ele.type} </span> 
-                            </div>
-                        </Link>
-                    );
-                }):null
-            }
-        </div>
+        {loading?<Loader status={loading}/>:
+        <> 
+            <div id="search-results-container">
+                {
+                    Array.isArray(restaurants) ? restaurants.map((ele,key)=>{
+                        return(                    
+                            <Link to={`/restaurant/${ele.id}`} className="restaurant-card" key={key}>
+                                <div className="restro-img"><img src="../../logo192.png" alt="" /></div>
+                                <div className="restro-details">
+                                    <span className="restaurant-name"><strong>{ele.name || 'Name'}</strong></span><br />
+                                    <span className="address">{ele.address || 'address'}, {ele.city ||'city'}, {ele.state || 'State'}</span><br />
+                                    <span className='light-icon'><FontAwesomeIcon icon={faUtensils}/> {ele.service_type}</span>
+                                    <br /><span className='light-icon'><span className="light-icon"><FontAwesomeIcon icon={faBowlRice}/> </span>{ele.type} </span> 
+                                </div>
+                            </Link>
+                        );
+                    }):null
+                }
+            </div>
+        </>}
       </>
     );
 }

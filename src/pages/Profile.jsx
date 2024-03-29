@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../user/UserSlice';
 import { useNavigate } from 'react-router';
 import Loader from '../components/Loader';
+import apiUrl from '../Vars';
 
 
 
@@ -24,7 +25,7 @@ const Profile = ()=>{
     const submit = ()=>{
         setLoading(true);
         console.log(mobile,password);
-        axios.post('http://127.0.0.1:8626/api/login',{mobile:mobile,password:password}).then((res)=>{
+        axios.post(`${apiUrl}/api/login`,{mobile:mobile,password:password}).then((res)=>{
             console.log(res);
             if(res.data.status===true){
                 dispatch(login(res.data.user));

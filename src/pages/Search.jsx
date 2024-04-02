@@ -74,8 +74,7 @@ const Search = ()=>{
     }
 
     return (
-      <>
-        
+      <div id="search-page">
         <div id="search-container">
             <div id="search-bar">
                 <input type="search" name='name' id="name" value={name} onChange={(e)=>handleSearchInput(e)} placeholder="Search by restaurants..." ></input>
@@ -117,7 +116,7 @@ const Search = ()=>{
                 }
             </div>
         </>}
-      </>
+      </div>
     );
 }
 

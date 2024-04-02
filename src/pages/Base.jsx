@@ -12,13 +12,15 @@ const Base = ()=>{
     return(
         <>
             <Header/>
-            <Routes>
-                <Route path='/' element={<Home/>}></Route>
-                <Route path='/search' element={<Search/>}></Route>
-                <Route path='/profile' element={<Profile/>}></Route>
-                <Route path='/restaurant/:id' element={<Restaurant/>}></Route>
-                <Route path='/book-table/:id' element={<BookTable/>}></Route>
-            </Routes>
+            <div id="main-section">
+                <Routes>
+                    <Route path='/' element={<Home/>}></Route>
+                    <Route path='/search' element={<Search/>}></Route>
+                    <Route path='/profile' element={<Profile/>}></Route>
+                    <Route path='/restaurant/:id' element={<Restaurant/>}></Route>
+                    <Route path='/book-table/:id' element={<BookTable/>}></Route>
+                </Routes>
+            </div>
         </>
     );
 };

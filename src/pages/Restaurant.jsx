@@ -36,8 +36,8 @@ export const Restaurant = ()=>{
                 <Loader status={isLoading}/>:
                 <div id='restaurant-page'>
                     <div className='head' style={{backgroundImage:'url(../../logo192.png)'}}>
-                        <h2>{restaurant?.name}</h2>
-                        <span className='address'>{restaurant?.address + ', ' + restaurant?.city}</span>
+                        <span className='restaurant-name'>{restaurant?.name}</span>
+                        <span className='address'>{restaurant?.address}, <br />{restaurant?.city}</span>
                     </div>
                     <div id='restaurant-sheet'>
                         <div id="book-table-btn">

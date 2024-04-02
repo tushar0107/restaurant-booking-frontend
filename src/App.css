@@ -6,6 +6,19 @@ input{
   padding: .5rem 1rem;
   outline: none;
 }
+button{
+  outline: none;
+  border: none;
+  background-color: salmon;
+  font-weight: bold;
+  color: white;
+}
+/* all pages common */
+#home-page,
+#search-page,
+#book-table-page{
+  padding: 0 1rem;
+}
 
 /* loader component */
 #loader-container{
@@ -47,9 +60,13 @@ input{
 }
 
 #header{
+  position: sticky;
+  z-index: 10000;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: white;
 }
 #header .logo{
   padding: 1rem;
@@ -58,12 +75,14 @@ input{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  gap: 2rem;
 }
 #header nav a{
   text-decoration: none;
   padding: 1rem;
 }
+
+/* home page  */
+
 
 /* login form */
 #login-form{
@@ -75,36 +94,32 @@ input{
 #login-form input,
 #login-form button{
   display: block;
-  width: 100%;
-  margin: 0 auto;
+  width: inherit;
   padding: 1rem;
   border: var(--border);
   border-radius: 4px;
   margin: 1rem auto;
 }
-
-/* search page */
-#search-container{
-  padding: 0 1rem;
+#login-form button{
+  width: 50%;
+  border: none;
 }
-#search-bar{
+/* search page */
+
+#search-bar {
   width: 100%;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: calc(60% - .25rem) calc(40% - .25rem);
   gap: .5rem;
-  margin-bottom: .5rem;
+  margin: .5rem auto;
 }
 #search-bar input{
   padding: 1rem;
   outline: none;
 }
-#search-bar input#name{
+#search-bar input{
   width: 100%;
-
 }
-/* #search-bar input#city{
-  width: 100%;
-} */
 .option-button{
   position: relative;
   display: inline-block;
@@ -138,9 +153,7 @@ input{
   color: gray;
   font-size: 14px;
 }
-#search-results-container{
-  padding: 1rem;
-}
+
 .restaurant-card{
   display: flex;
   justify-content: flex-start;
@@ -182,11 +195,15 @@ input{
   background-position: center;
   background-size: cover;
 }
+.restaurant-name {
+  font-size: 28px;
+  font-weight: bold;
+}
 #restaurant-sheet{
   width: 100%;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  box-shadow: 0 -6px 10px #e4e4e4;
+  box-shadow: 0 -6px 10px #00000033;
 }
 #restaurant-sheet #book-table-btn{
   display: flex;
@@ -228,9 +245,7 @@ input{
 }
 
 /* book-table-page */
-#book-table-page{
-  padding: 1rem;
-}
+
 #table-list{
   padding: .5rem 1rem;
 }
@@ -240,7 +255,7 @@ input{
   margin: .5rem auto;
 }
 .date-time-input{
-  padding: .5rem;
+  padding: 1rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -251,7 +266,5 @@ input{
 }
 .confirm-btn{
   position: absolute;
-  bottom: 0;
-  left: 1rem;
-  right: 1rem;
+  inset: auto 0 0 0;
 }

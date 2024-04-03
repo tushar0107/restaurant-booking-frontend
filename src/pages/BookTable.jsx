@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import Loader from '../components/Loader';
@@ -8,24 +8,35 @@ import apiUrl from '../Vars';
 
 export const BookTable = ()=>{
     const params= useParams();
-    const user = useSelector(state=>state.user);
+    const user = useSelector(state=>state.user.value);
     const [guests,setGuests] = useState('');
     const [table,setTable] = useState();
     const [date,setDate] = useState('');
     const [time,setTime] = useState('');
     const [details,setDetails] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [restaurant,setRestaurant] = useState();
     
     const formData = {
-        user_id:user?.value.id,
+        user_id:user.id,
         restaurant_id:parseInt(params.id),
         table_no:table,
         details:details,
         guests:guests,
         booking_date: new Date(),
         visit_date:date,
-        visit_time:time
+        visit_time:time,
+        restaurant_name:restaurant?.name
     }
+
+    useEffect(()=>{
+        axios.get(`${apiUrl}/api/get-restaurant/${params.id}`).then((res)=>{
+            console.log('restaurant: ',res.data);
+            if(res.data.status){
+                setRestaurant(res.data.data[0]);
+            }
+        }).catch(err=>{console.log(err)});
+    },[params.id]);
 
     const handleFormData = (e)=>{
         switch (e.target.name) {
@@ -51,7 +62,7 @@ export const BookTable = ()=>{
 
     const submitBooking = ()=>{
         if(checkValidation()){
-            if(table===undefined){
+            if(table==="0"){
                 alert('You have not selected any table. We will reserve one for you by our side. Thank you.')
             }
             console.log(formData);
@@ -77,17 +88,17 @@ export const BookTable = ()=>{
         }else return true;
     }
 
+
     return(
         <>
-            {isLoading? <Loader status={isLoading}/>:
-            <><div id="book-table-page">
+            <div id="book-table-page">
                 {/* <h2>Create A Booking</h2> */}
                 <div className='num-of-guests'>
                     <input type="number" name="num-of-guests" value={guests} onChange={(e)=>handleFormData(e)} placeholder='Enter no. of Guests' />
                     <div>
                         <span>Table no. </span>
                         <select name="table" id="table-list" value={table} onChange={(e)=>handleFormData(e)}>
-                            <option value={undefined}>Select Table</option>
+                            <option value="0">Select Table</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -106,8 +117,7 @@ export const BookTable = ()=>{
                 </div>
             </div>
             <button className='confirm-btn submit-btn' onClick={submitBooking}>Confirm Booking</button>
-            </>
-            }
+            <Loader status={isLoading}/>
         </>
     );
 }

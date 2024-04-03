@@ -16,7 +16,8 @@ button{
 /* all pages common */
 #home-page,
 #search-page,
-#book-table-page{
+#book-table-page,
+#profile-container{
   padding: 0 1rem;
 }
 
@@ -30,7 +31,7 @@ button{
   background-color: #0000002f;
 }
 #loader-dialog{
-  width: 35%;
+  width: min(200px,35%);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -83,6 +84,17 @@ button{
 
 /* home page  */
 
+/* profile page */
+
+.booking-card {
+  padding: 1rem;
+  border: 2px solid lightgrey;
+  border-radius: 1rem;
+  margin: 1rem auto;
+}
+.booking-card span {
+  line-height: 2rem;
+}
 
 /* login form */
 #login-form{

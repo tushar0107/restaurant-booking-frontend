@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const user = useSelector((state)=>state.user);
+  const user = useSelector((state)=>state.user.value);
   return (
       <div id="header">
         <div className="logo">
-          {(user.value?.first_name || "") + " " + (user.value?.last_name || "")}
+          {(user?.first_name || "") + " " + (user?.last_name || "")}
         </div>
         <nav>
           <Link to={"/search"}>Search</Link>

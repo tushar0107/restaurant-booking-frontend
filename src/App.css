@@ -80,6 +80,8 @@ button{
 #header nav a{
   text-decoration: none;
   padding: 1rem;
+  font-weight: bold;
+  color: #333;
 }
 
 /* home page  */
@@ -118,7 +120,8 @@ button{
 }
 /* search page */
 
-#search-bar {
+#search-bar,
+.table-details {
   width: 100%;
   display: grid;
   grid-template-columns: calc(60% - .25rem) calc(40% - .25rem);
@@ -154,11 +157,6 @@ button{
   border: 2px solid salmon;
   color: #f3402c;
 }
-#search-container button.submit-btn{
-  display: block;
-  margin: .5rem auto;
-  width:100%;
-}
 
 /* search results */
 .light-icon{
@@ -187,28 +185,25 @@ button{
 }
 .restaurant-card .address,
 #restaurant-page .address{
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: grey;
-  white-space: no-wrap;
+  white-space: nowrap;
 }
 
 /* restaurant-page */
-#restaurant-page{
+#restaurant-page {
   width: 100%;
+  background-position: top;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('../public/restaurant-default.jpg');
 }
-#restaurant-page .head{
-  width: 100%;
+#restaurant-page .spacer{
   height: 25vh;
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: column;
-  padding: 1rem;
-  background-position: center;
-  background-size: cover;
 }
 .restaurant-name {
-  font-size: 28px;
+  font-size: 18px;
   font-weight: bold;
 }
 #restaurant-sheet{
@@ -216,15 +211,24 @@ button{
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
   box-shadow: 0 -6px 10px #00000033;
+  background-color: white;
 }
-#restaurant-sheet #book-table-btn{
+.restaurant-details {
+  max-width: 56%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#restaurant-sheet #book-table-btn {
   display: flex;
   justify-content: flex-end;
+  padding: 0 1rem;
+  align-items: center;
 }
 #book-table-btn a,
 .submit-btn{
-  padding: .5rem 1rem;
-  margin: 1rem;
+  width: 100%;
+  padding: .8rem 1rem;
+  margin: 1rem auto;
   border: none;
   border-radius: .5rem;
   color: white;
@@ -232,10 +236,14 @@ button{
   font-weight: 700;
   text-decoration: none;
 }
+#book-table-btn a {
+  width: fit-content;
+  margin-right: 0;
+}
 #menu-list{
   overflow-y: scroll;
   height: 50vh;
-  padding: .5rem;
+  padding: 0 .5rem;
 }
   #menu-list::-webkit-scrollbar{
   width: 6px;
@@ -251,6 +259,8 @@ button{
   gap: 1rem;
   margin-top: .5rem;
   border-bottom: 1px solid lightgrey;
+  font-size: 14px;
+  padding: .5rem 0;
 }
 .menu-img img{
   width: 80px;
@@ -261,10 +271,9 @@ button{
 #table-list{
   padding: .5rem 1rem;
 }
-.num-of-guests{
+.table-details .details-input {
   display: flex;
-  gap: 1rem;
-  margin: .5rem auto;
+  flex-direction: column;
 }
 .date-time-input{
   padding: 1rem 0;
@@ -272,11 +281,6 @@ button{
   justify-content: space-between;
   align-items: center;
 }
-#details textarea{
-  display: block;
+textarea#details {
   width: 100%;
-}
-.confirm-btn{
-  position: absolute;
-  inset: auto 0 0 0;
 }

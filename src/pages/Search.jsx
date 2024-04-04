@@ -96,8 +96,8 @@ const Search = ()=>{
             <span className='option-button'><input type="radio" id='service-restaurant' name='service-type' onChange={(e)=>{handleSearchInput(e)}} value="Family Restaurant" ></input><label htmlFor="service-restaurant">Family Restaurant</label></span>
             <br /><button className='submit-btn' onClick={searchOutput}> Search</button>
         </div>
-        {loading?<Loader status={loading}/>:
-        <> 
+        
+        
             <div id="search-results-container">
                 {
                     Array.isArray(restaurants) ? restaurants.map((ele,key)=>{
@@ -115,7 +115,7 @@ const Search = ()=>{
                     }):null
                 }
             </div>
-        </>}
+        <Loader status={loading}/>
       </div>
     );
 }

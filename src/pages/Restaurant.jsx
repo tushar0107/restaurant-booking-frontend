@@ -35,12 +35,13 @@ export const Restaurant = ()=>{
             isLoading ?
                 <Loader status={isLoading}/>:
                 <div id='restaurant-page'>
-                    <div className='head' style={{backgroundImage:'url(../../logo192.png)'}}>
-                        <span className='restaurant-name'>{restaurant?.name}</span>
-                        <span className='address'>{restaurant?.address}, <br />{restaurant?.city}</span>
-                    </div>
+                    <div className='spacer'></div>
                     <div id='restaurant-sheet'>
                         <div id="book-table-btn">
+                            <div className='restaurant-details'>
+                                <span className='restaurant-name'>{restaurant?.name}</span><br />
+                                <span className='address'>{restaurant?.address+', '+restaurant?.city}</span>
+                            </div>
                             <Link to={`/book-table/${id}`}>Book a Table</Link>
                         </div>
                         <div id="menu-list">
@@ -50,7 +51,7 @@ export const Restaurant = ()=>{
                                     return(
                                         <div className="menu-item" key={index}>
                                             <div className="menu-img">
-                                                <img src="../../logo192.png" alt="" />
+                                                <img src={item.food_image_url?(apiUrl+'/'+item.food_image_url):'../../food-item.png'} alt="" />
                                             </div>
                                             <div className="menu-details">
                                                 <strong>{item.food_item}</strong><br />

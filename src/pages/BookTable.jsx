@@ -10,17 +10,18 @@ export const BookTable = ()=>{
     const params= useParams();
     const user = useSelector(state=>state.user.value);
     const [guests,setGuests] = useState('');
-    const [table,setTable] = useState();
+    const [table,setTable] = useState(0);
     const [date,setDate] = useState('');
     const [time,setTime] = useState('');
     const [details,setDetails] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [restaurant,setRestaurant] = useState();
-    
+
+        
     const formData = {
-        user_id:user.id,
+        user_id:user?.id,
         restaurant_id:parseInt(params.id),
-        table_no:table,
+        table_no:table || 0,
         details:details,
         guests:guests,
         booking_date: new Date(),
@@ -62,7 +63,7 @@ export const BookTable = ()=>{
 
     const submitBooking = ()=>{
         if(checkValidation()){
-            if(table==="0"){
+            if(table==="0" || table===""){
                 alert('You have not selected any table. We will reserve one for you by our side. Thank you.')
             }
             console.log(formData);
@@ -93,30 +94,33 @@ export const BookTable = ()=>{
         <>
             <div id="book-table-page">
                 {/* <h2>Create A Booking</h2> */}
-                <div className='num-of-guests'>
-                    <input type="number" name="num-of-guests" value={guests} onChange={(e)=>handleFormData(e)} placeholder='Enter no. of Guests' />
-                    <div>
+                <div className='table-details'>
+                    <div className='details-input'>
+                        <span>Enter No. of guests</span>
+                        <input type="number" name="num-of-guests" value={guests} onChange={(e)=>handleFormData(e)} placeholder='No. of Guests' />
+                    </div>
+                    <div className='details-input'>
                         <span>Table no. </span>
-                        <select name="table" id="table-list" value={table} onChange={(e)=>handleFormData(e)}>
-                            <option value="0">Select Table</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
+                        <input type='number' name="table" id="table-list" min='1' max={restaurant?.table_capacity} value={table} onChange={(e)=>handleFormData(e)} placeholder={`1-${restaurant?.table_capacity}`}></input>
                     </div>
                 </div>
-                <div className='date-time-input'>
-                    <span>Select Date <br /><input type="date" name="date" value={date} onChange={(e)=>handleFormData(e)} id="date" /></span>
-                    <span>Select Time <br />
+                <div className='table-details'>
+                    <div className="details-input">
+                        <span>Select Date </span>
+                        <input type="date" name="date" value={date} onChange={(e)=>handleFormData(e)} id="date" />
+                    </div>
+                    <div className="details-input">
+                        <span>Select Time </span>
                         <input type="time" name="time" value={time} onChange={(e)=>handleFormData(e)} id="time" />
-                    </span>
+                    </div>
+                    
                 </div>
                 <div className="details">
                     <br /><span>Enter any arrangements if you want us to make for you</span><br />
                         <textarea name="details" id="details" rows="3" value={details} onChange={(e)=>handleFormData(e)}></textarea>
                 </div>
-            </div>
             <button className='confirm-btn submit-btn' onClick={submitBooking}>Confirm Booking</button>
+            </div>
             <Loader status={isLoading}/>
         </>
     );

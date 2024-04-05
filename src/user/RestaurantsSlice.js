@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const restaurantsSlice = createSlice({
     name: 'restaurants',
-    initialState:[],
+    initialState:{},
     reducers:{
         saveRestaurants: (state,action)=>{
             console.log(action.payload);
             state.value = action.payload;
         },
         clearRestaurants: (state)=>{
-            state.value = [];
+            state.value = {};
         },
     },
 });

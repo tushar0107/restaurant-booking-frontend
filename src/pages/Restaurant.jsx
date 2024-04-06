@@ -42,7 +42,7 @@ export const Restaurant = ()=>{
                                 <span className='restaurant-name'>{restaurant?.name}</span><br />
                                 <span className='address'>{restaurant?.address+', '+restaurant?.city}</span>
                             </div>
-                            <Link to={`/book-table/${id}`}>Book a Table</Link>
+                            <Link to={`/book-table/${id}`}><button>Book a Table</button></Link>
                         </div>
                         <div id="menu-list">
                             {

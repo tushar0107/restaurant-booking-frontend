@@ -16,9 +16,8 @@ button{
   color: white;
   cursor: pointer;
   margin: 1rem auto;
+  padding: .8rem 1rem;
   border-radius: .5rem;
-  font-weight: 700;
-  text-decoration: none;
 }
 /* all pages common */
 #home-page,
@@ -155,6 +154,7 @@ button{
 #login-form button{
   display: block;
   width: inherit;
+  margin: 1rem auto;
   padding: 1rem;
   border: var(--border);
   border-radius: 4px;
@@ -265,19 +265,18 @@ button{
 }
 #restaurant-sheet #book-table-btn {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 0 1rem;
   align-items: center;
 }
-#book-table-btn a,
 .submit-btn{
   width: 100%;
   padding: .8rem 1rem;
 }
 #book-table-btn a {
   width: fit-content;
-  margin: 1rem auto;
   margin-right: 0;
+  text-decoration: none;
 }
 #menu-list{
   overflow-y: scroll;

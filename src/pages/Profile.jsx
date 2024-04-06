@@ -48,14 +48,14 @@ const Profile = ()=>{
     }
 
     useEffect(()=>{
-            // if(user){
-            //     setLoading(true);
-            //     axios.get(`${apiUrl}/api/get-bookings/${user.id}`).then((res)=>{
-            //         console.log(res.data);
-            //         setBookings(res.data.data);
-            //         setLoading(false);
-            //     }).catch(err=>console.log(err));
-            // }
+            if(user){
+                setLoading(true);
+                axios.get(`${apiUrl}/api/get-bookings/${user.id}`).then((res)=>{
+                    console.log(res.data);
+                    setBookings(res.data.data);
+                    setLoading(false);
+                }).catch(err=>console.log(err));
+            }
             const restaurantFromls = localStorage.getItem('restaurant');
             if(restaurantFromls!==null){
                 dispatch(saveRestaurants(JSON.parse(restaurantFromls)));
@@ -117,7 +117,8 @@ const Profile = ()=>{
             <div id='login-form'>
                 <h3>Login</h3>
                 <input type="number" onChange={(e)=>handleMobile(e)} name="mobile" value={mobile} />
-                <input type="password" onChange={(e)=>handlePassword(e)} name='password' value={password} />
+                <div>
+                <input type="password" onChange={(e)=>handlePassword(e)} name='password' value={password} /><button>eye</button></div>
                 <button type='submit' onClick={submit}>Login</button>
             </div>}
             <Loader status={loading}/>

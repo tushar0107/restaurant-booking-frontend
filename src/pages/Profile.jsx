@@ -5,6 +5,8 @@ import { login } from '../user/UserSlice';
 import { saveRestaurants } from '../user/RestaurantsSlice';
 import RestaurantForm from '../components/RestaurantForm';
 import Loader from '../components/Loader';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationPin } from '@fortawesome/free-solid-svg-icons';
 import apiUrl from '../Vars';
 
 
@@ -30,17 +32,18 @@ const Profile = ()=>{
     const submit = ()=>{
         setLoading(true);
         axios.post(`${apiUrl}/api/login`,{mobile:mobile,password:password}).then((res)=>{
-            console.log(res);
             if(res.data.status===true){
                 dispatch(login(res.data.user));
-                dispatch(saveRestaurants(res.data.restaurant));
-                localStorage.setItem('userData',JSON.stringify(res.data.user));
-                localStorage.setItem('restaurant',JSON.stringify(res.data.restaurant));
-                setRestaurant(res.data.restaurant);
+                localStorage.setItem('userData',JSON.stringify(res.data.user[0]));
+                if(res.data.user[0].user_type==='owner'){
+                    dispatch(saveRestaurants(res.data.restaurant));
+                    localStorage.setItem('restaurant',JSON.stringify(res.data.restaurant));
+                    setRestaurant(res.data.restaurant);
+                }
             }else{
                 alert(res.data.message);
             }
-            setLoading(false);
+            setLoading(false);  
         }).catch((err)=>{
             console.log(err);
         });
@@ -56,13 +59,11 @@ const Profile = ()=>{
                     setLoading(false);
                 }).catch(err=>console.log(err));
             }
-            const restaurantFromls = localStorage.getItem('restaurant');
-            if(restaurantFromls!==null){
-                dispatch(saveRestaurants(JSON.parse(restaurantFromls)));
+            if(restaurantFromStore){
+                console.log(restaurantFromStore);
+                setRestaurant(restaurantFromStore);
             }
-            setRestaurant(restaurantFromStore);
 
-            return;
     },[user]);
 
     return (
@@ -102,7 +103,7 @@ const Profile = ()=>{
                                             <span>Phone : {ele.phone1}, {ele?.phone2}</span><br />
                                             <span>{ele.type} | {ele?.ethnicity}</span><br />
                                             <span>{ele.service_type} | {ele.table_capacity}</span><br />
-                                            {ele.location!==null?<span><a href={ele.location} target='_blank' rel="noreferrer">{ele.location}</a></span>:null}
+                                            {ele.location!==null?<span><FontAwesomeIcon icon={faLocationPin}/> <a href={ele.location} target='_blank' rel="noreferrer">{ele.location}</a></span>:null}
                                         </div>
                                     );
                                 }) : null
@@ -117,10 +118,10 @@ const Profile = ()=>{
             <div id='login-form'>
                 <h3>Login</h3>
                 <input type="number" onChange={(e)=>handleMobile(e)} name="mobile" value={mobile} />
-                <div>
-                <input type="password" onChange={(e)=>handlePassword(e)} name='password' value={password} /><button>eye</button></div>
+                <input type="password" onChange={(e)=>handlePassword(e)} name='password' value={password} />
                 <button type='submit' onClick={submit}>Login</button>
             </div>}
+            {user?<button type='submit' className='secondary-btn' onClick={()=>localStorage.clear()}>Logout</button>:null}
             <Loader status={loading}/>
             <RestaurantForm show={openForm} formShow={setOpenForm} />
         </div>

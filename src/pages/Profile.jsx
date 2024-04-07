@@ -1,12 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../user/UserSlice';
+import { login, logout } from '../user/UserSlice';
 import { saveRestaurants } from '../user/RestaurantsSlice';
 import RestaurantForm from '../components/RestaurantForm';
 import Loader from '../components/Loader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationPin } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import apiUrl from '../Vars';
 
 
@@ -45,9 +45,16 @@ const Profile = ()=>{
             }
             setLoading(false);  
         }).catch((err)=>{
+            setLoading(false);  
             console.log(err);
         });
     
+    }
+
+    const userlogout =()=>{
+        localStorage.clear();
+        window.location.reload();
+        dispatch(logout());
     }
 
     useEffect(()=>{
@@ -103,7 +110,7 @@ const Profile = ()=>{
                                             <span>Phone : {ele.phone1}, {ele?.phone2}</span><br />
                                             <span>{ele.type} | {ele?.ethnicity}</span><br />
                                             <span>{ele.service_type} | {ele.table_capacity}</span><br />
-                                            {ele.location!==null?<span><FontAwesomeIcon icon={faLocationPin}/> <a href={ele.location} target='_blank' rel="noreferrer">{ele.location}</a></span>:null}
+                                            {ele.location!==null?<span><FontAwesomeIcon icon={faLocationDot}/> <a href={ele.location} target='_blank' rel="noreferrer">{ele.location}</a></span>:null}
                                         </div>
                                     );
                                 }) : null
@@ -121,7 +128,7 @@ const Profile = ()=>{
                 <input type="password" onChange={(e)=>handlePassword(e)} name='password' value={password} />
                 <button type='submit' onClick={submit}>Login</button>
             </div>}
-            {user?<button type='submit' className='secondary-btn' onClick={()=>localStorage.clear()}>Logout</button>:null}
+            {user?<button type='submit' className='secondary-btn' onClick={userlogout}>Logout</button>:null}
             <Loader status={loading}/>
             <RestaurantForm show={openForm} formShow={setOpenForm} />
         </div>

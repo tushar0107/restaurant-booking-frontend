@@ -1,24 +1,28 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import apiUrl from '../Vars';
+import Loader from './Loader';
 
 const RestaurantForm = ({show,formShow})=>{
 
     const user = useSelector((state)=>state.user.value);
 
-    const [name,setName] = useState();
-    const [address,setAddress] = useState();
-    const [city,setCity] = useState();
-    const [state,setState] = useState();
+    const [name,setName] = useState('');
+    const [address,setAddress] = useState('');
+    const [city,setCity] = useState('');
+    const [state,setState] = useState('');
     const [phone1,setPhone1] = useState();
     const [phone2,setPhone2] = useState();
-    const [type,setType] = useState();
-    const [ethnicity,setEthnicity] = useState();
+    const [type,setType] = useState('');
+    const [ethnicity,setEthnicity] = useState('');
     const [tableCapacity,setTableCapaciy] = useState();
-    const [serviceType, setServiceType] = useState();
-    const [location, setLocation] = useState();
+    const [serviceType, setServiceType] = useState('');
+    const [location, setLocation] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const formData = {
-        owner: user?.id,
+        user_id: user?.id,
         name:name,
         address:address,
         city:city,
@@ -29,7 +33,8 @@ const RestaurantForm = ({show,formShow})=>{
         ethnicity:ethnicity,
         table_capacity:tableCapacity,
         service_type:serviceType,
-        location:location
+        location:location,
+        owner:user?.id
     }
 
     useEffect(()=>{},[user]);
@@ -54,7 +59,7 @@ const RestaurantForm = ({show,formShow})=>{
             case 'phone2':
                 setPhone2(e.target.value);
                 break;
-            case 'type':
+            case 'food-type':
                 setType(e.target.value);
                 break;
             case 'ethnicity':
@@ -72,6 +77,21 @@ const RestaurantForm = ({show,formShow})=>{
             default:
                 break;
         }
+    }
+
+    const submitForm = ()=>{
+        setLoading(true);
+        axios.post(`${apiUrl}/api/register-restaurant`,{...formData}).then((res)=>{
+            console.log(res.data);
+            alert(res.data.message);
+            setLoading(false);
+            formShow(false);
+            window.location.reload();
+        }).catch(err=>{
+            console.log(err);
+            setLoading(false);
+            formShow(false);
+        });
     }
 
     return (
@@ -117,9 +137,10 @@ const RestaurantForm = ({show,formShow})=>{
                     <label htmlFor="location">Location</label><br />
                     <input type="text" name='location' id='location' value={location} onChange={(e)=>handleForm(e)} placeholder='Google maps link'></input>
                 </div>
-                <button className='submit-btn form-btn'>Submit</button>
+                <button className='submit-btn form-btn' onClick={submitForm}>Submit</button>
                 <button className='submit-btn form-btn' onClick={()=>formShow(false)}>Cancel</button>
             </div>
+            <Loader status={loading}/>
         </div>
     );
 }

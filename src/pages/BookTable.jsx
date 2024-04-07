@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import Loader from '../components/Loader';
 import axios from 'axios';
 import apiUrl from '../Vars';
+import LoginComponent from '../components/LoginComponent';
 
 
 export const BookTable = ()=>{
@@ -16,7 +17,7 @@ export const BookTable = ()=>{
     const [details,setDetails] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [restaurant,setRestaurant] = useState();
-
+    const [showLogin, setShowLogin] = useState('none');
         
     const formData = {
         user_id:user?.id,
@@ -31,6 +32,9 @@ export const BookTable = ()=>{
     }
 
     useEffect(()=>{
+        if(!user){
+            setShowLogin('block');
+        }else{setShowLogin('none')}
         axios.get(`${apiUrl}/api/get-restaurant/${params.id}`).then((res)=>{
             console.log('restaurant: ',res.data);
             if(res.data.status){
@@ -122,6 +126,7 @@ export const BookTable = ()=>{
             <button className='confirm-btn submit-btn' onClick={submitBooking}>Confirm Booking</button>
             </div>
             <Loader status={isLoading}/>
+            <LoginComponent show={showLogin} hide={setShowLogin}/>
         </>
     );
 }

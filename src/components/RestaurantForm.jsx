@@ -138,7 +138,7 @@ const RestaurantForm = ({show,formShow})=>{
                     <input type="text" name='location' id='location' value={location} onChange={(e)=>handleForm(e)} placeholder='Google maps link'></input>
                 </div>
                 <button className='submit-btn form-btn' onClick={submitForm}>Submit</button>
-                <button className='submit-btn form-btn' onClick={()=>formShow(false)}>Cancel</button>
+                <button className='secondary-btn form-btn cancel-btn' onClick={()=>formShow(false)}>Cancel</button>
             </div>
             <Loader status={loading}/>
         </div>

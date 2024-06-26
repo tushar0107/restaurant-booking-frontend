@@ -32,13 +32,10 @@ export const BookTable = ()=>{
     }
 
     useEffect(()=>{
-        if(!user){
-            setShowLogin('block');
-        }else{setShowLogin('none')}
         axios.get(`${apiUrl}/api/get-restaurant/${params.id}`).then((res)=>{
             console.log('restaurant: ',res.data);
             if(res.data.status){
-                setRestaurant(res.data.data[0]);
+                setRestaurant(res.data.data);
             }
         }).catch(err=>{console.log(err)});
     },[params.id]);
@@ -126,7 +123,7 @@ export const BookTable = ()=>{
             <button className='confirm-btn submit-btn' onClick={submitBooking}>Confirm Booking</button>
             </div>
             <Loader status={isLoading}/>
-            <LoginComponent show={showLogin} hide={setShowLogin}/>
+            {user?'': <LoginComponent show={showLogin} hide={setShowLogin}/>}
         </>
     );
 }

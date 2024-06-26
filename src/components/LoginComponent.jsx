@@ -24,8 +24,8 @@ const LoginComponent = ({show,hide}) => {
         axios.post(`${apiUrl}/api/login`,{mobile:mobile,password:password}).then((res)=>{
             if(res.data.status===true){
                 dispatch(login(res.data.user));
-                localStorage.setItem('userData',JSON.stringify(res.data.user[0]));
-                if(res.data.user[0].user_type==='owner'){
+                localStorage.setItem('userData',JSON.stringify(res.data.user));
+                if(res.data.user.user_type==='owner'){
                     dispatch(saveRestaurants(res.data.restaurant));
                     localStorage.setItem('restaurant',JSON.stringify(res.data.restaurant));
                 }

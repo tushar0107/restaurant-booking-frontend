@@ -15,9 +15,9 @@ export const Restaurant = ()=>{
     useEffect(()=>{
         setIsLoading(true);
         axios.get(`${apiUrl}/api/get-restaurant/${id}`).then((res)=>{
-            console.log('restaurant: ',res.data);
+            console.log('restaurant: ',res.data.data);
             if(res.data.status){
-                setRestaurant(res.data.data[0]);
+                setRestaurant(res.data.data);
             }
         }).then(()=>{
             axios.get(`${apiUrl}/api/menu/${id}`).then((res)=>{

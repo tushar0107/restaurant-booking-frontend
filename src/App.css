@@ -1,6 +1,7 @@
 /* variables */
 :root{
   --border: 2px solid grey;
+  --white-bg: white;
 }
 input{
   padding: .5rem 1rem;
@@ -24,6 +25,10 @@ button{
 #book-table-page,
 #profile-container{
   padding: 0 1rem;
+}
+
+.cancel-btn{
+  width: 100%;
 }
 
 /* loader component */
@@ -96,12 +101,37 @@ button{
 #profile-page{
   position: relative;
 }
-
+#profile-drop{
+  position: relative;
+}
+#profile-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  background-color: var(--white-bg);
+}
+#profile-button .inline-btn {
+  display: inline-block;
+  padding: 0.5rem;
+  aspect-ratio: 1;
+  width: 2rem;
+  margin: 0;
+}
+#profile-content{
+  position: relative;
+  z-index: -1;
+  transition: all .3s ease;
+  margin-top: -120px;
+}
+#profile-content p{
+  margin: .5rem 0;
+}
 .booking-card {
-  padding: 1rem;
   border: 2px solid lightgrey;
-  border-radius: 1rem;
+  border-radius: .5rem;
   margin: 1rem auto;
+  padding: .5rem;
 }
 .booking-card span {
   line-height: 2rem;
@@ -248,8 +278,7 @@ button{
 .restaurant-card .restaurant-name{
   font-size: 20px;
 }
-.restaurant-card .address,
-#restaurant-page .address{
+.restaurant-card .address{
   font-size: 14px;
   font-weight: 500;
   color: grey;
@@ -269,6 +298,12 @@ button{
 .restaurant-name {
   font-size: 18px;
   font-weight: bold;
+}
+#restaurant-page .address{
+  font-size: 12px;
+  font-weight: 500;
+  color: grey;
+  text-wrap: nowrap;
 }
 #restaurant-sheet{
   width: 100%;

@@ -9,7 +9,7 @@ const Header = () => {
   return (
       <div id="header">
         <div className="logo">
-          <strong>{(user?.first_name || "Book My Table") + " " + (user?.last_name || "")}</strong>
+          {(user?.first_name || "Book My Table") + " " + (user?.last_name || "")}
         </div>
         <nav>
           <Link to={"/search"}><FontAwesomeIcon icon={faSearch}/></Link>

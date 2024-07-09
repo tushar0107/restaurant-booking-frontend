@@ -5,6 +5,7 @@ export const restaurantsSlice = createSlice({
     initialState:{},
     reducers:{
         saveRestaurants: (state,action)=>{
+            console.log(action.payload);
             state.value = action.payload;
         },
         clearRestaurants: (state)=>{

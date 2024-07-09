@@ -11,19 +11,20 @@ export const Restaurant = ()=>{
     const [isLoading, setIsLoading] = useState(false);
     const [restaurant,setRestaurant] = useState();
     const [menu, setMenu] = useState();
-
+    
     useEffect(()=>{
+        console.log(id);
         setIsLoading(true);
         axios.get(`${apiUrl}/api/get-restaurant/${id}`).then((res)=>{
-            console.log('restaurant: ',res.data.data);
+            console.log('restaurant: ',res.data);
             if(res.data.status){
-                setRestaurant(res.data.data);
+                setRestaurant(res.data.result);
             }
         }).then(()=>{
             axios.get(`${apiUrl}/api/menu/${id}`).then((res)=>{
                 console.log('menu: ',res.data);
                 if(res.data.status){
-                    setMenu(res.data.data);
+                    setMenu(res.data.result);
                 }
             });
             setIsLoading(false);

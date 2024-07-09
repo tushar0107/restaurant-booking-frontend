@@ -1,7 +1,6 @@
 /* variables */
 :root{
   --border: 2px solid grey;
-  --white-bg: white;
 }
 input{
   padding: .5rem 1rem;
@@ -25,10 +24,6 @@ button{
 #book-table-page,
 #profile-container{
   padding: 0 1rem;
-}
-
-.cancel-btn{
-  width: 100%;
 }
 
 /* loader component */
@@ -78,7 +73,6 @@ button{
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  box-shadow: 0 0 5px #898989;
 }
 #header .logo{
   padding: 1rem;
@@ -101,37 +95,12 @@ button{
 #profile-page{
   position: relative;
 }
-#profile-drop{
-  position: relative;
-}
-#profile-button {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 1rem;
-  background-color: var(--white-bg);
-}
-#profile-button .inline-btn {
-  display: inline-block;
-  padding: 0.5rem;
-  aspect-ratio: 1;
-  width: 2rem;
-  margin: 0;
-}
-#profile-content{
-  position: relative;
-  z-index: -1;
-  transition: all .3s ease;
-  margin-top: -120px;
-}
-#profile-content p{
-  margin: .5rem 0;
-}
+
 .booking-card {
+  padding: 1rem;
   border: 2px solid lightgrey;
-  border-radius: .5rem;
+  border-radius: 1rem;
   margin: 1rem auto;
-  padding: .5rem;
 }
 .booking-card span {
   line-height: 2rem;
@@ -142,7 +111,6 @@ button{
   border-radius: 1rem;
   padding: 1rem;
   line-height: 1.2rem;
-  margin: 1rem auto;
 }
 #form-container {
   height: fit-content;
@@ -169,7 +137,7 @@ button{
 #form input {
   width: -webkit-fill-available;
 }
-#form-container .form-btn{
+.form-btn{
   margin: 0 auto;
   padding: 1rem;
 }
@@ -178,17 +146,6 @@ button{
 }
 
 /* login form */
-#login-pop-up{
-  position: absolute;
-  z-index: 10;
-  inset: 0 0 0 0;
-  padding-top: 4rem;
-  /* top: 50%; */
-  /* left: 50%; */
-  /* transform: translate(-50%,-50%); */
-  background-color: rgba(255, 255, 255, 0.473);
-  backdrop-filter: blur(2px);
-}
 #login-form{
   width: min(80%,500px);
   margin: 0 auto;
@@ -299,12 +256,6 @@ button{
   font-size: 18px;
   font-weight: bold;
 }
-#restaurant-page .address{
-  font-size: 12px;
-  font-weight: 500;
-  color: grey;
-  text-wrap: nowrap;
-}
 #restaurant-sheet{
   width: 100%;
   border-top-left-radius: 1rem;
@@ -316,6 +267,12 @@ button{
   max-width: 56%;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+#restaurant-page .address{
+  font-size: 14px;
+  font-weight: 500;
+  color: grey;
+  white-space: nowrap;
 }
 #restaurant-sheet #book-table-btn {
   display: flex;
@@ -375,8 +332,4 @@ button{
 }
 textarea#details {
   width: 100%;
-  max-width: 100%;
-  min-width: 100%;
-  max-height: 100px;
-  min-height: 100px;
 }

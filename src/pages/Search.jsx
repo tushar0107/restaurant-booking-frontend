@@ -56,14 +56,14 @@ const Search = ()=>{
     }
 
 
+    //submit search filter
     const searchOutput = (e)=>{
-        console.log(formData);
         setLoading(true);
 
         axios.post(`${apiUrl}/api/restaurants`,{...formData}).then((res)=>{
             console.log(res.data);
             if(res.data.length!==0){
-                setRestaurants(res.data.data);
+                setRestaurants(res.data.result);
             }
             setLoading(false);
         }).catch(err=>{
@@ -92,8 +92,7 @@ const Search = ()=>{
             <br />{/* <input type="text" name='ethnicity' className='search-input-box' value={ethnicity} onChange={(e)=>handleSearchInput(e)} placeholder="Type of restaurant" ></input> */}
             <span className='light-icon'><FontAwesomeIcon icon={faUtensils}/> </span>
             <span className='option-button'><input type="radio" id='service-cafe' name='service-type' onChange={(e)=>{handleSearchInput(e)}} value="Cafe" ></input><label htmlFor="service-cafe">Cafe</label></span>
-            <span className='option-button'><input type="radio" id='service-dining' name='service-type' onChange={(e)=>{handleSearchInput(e)}} value="Dinner" ></input><label htmlFor="service-dining">Dining</label></span>
-            <span className='option-button'><input type="radio" id='service-restaurant' name='service-type' onChange={(e)=>{handleSearchInput(e)}} value="Family Restaurant" ></input><label htmlFor="service-restaurant">Family Restaurant</label></span>
+            <span className='option-button'><input type="radio" id='service-restaurant' name='service-type' onChange={(e)=>{handleSearchInput(e)}} value="Restaurant" ></input><label htmlFor="service-restaurant">Family Restaurant</label></span>
             <br /><button className='submit-btn' onClick={searchOutput}> Search</button>
         </div>
         
@@ -102,7 +101,7 @@ const Search = ()=>{
                 {
                     Array.isArray(restaurants) ? restaurants.map((ele,key)=>{
                         return(                    
-                            <Link to={`/restaurant/${ele.id}`} className="restaurant-card" key={key}>
+                            <Link to={`/restaurant/${ele._id}`} className="restaurant-card" key={key}>
                                 <div className="restro-img"><img src="../../logo192.png" alt="" /></div>
                                 <div className="restro-details">
                                     <span className="restaurant-name"><strong>{ele.name || 'Name'}</strong></span><br />

@@ -15,7 +15,7 @@ const Profile = ()=>{
     const user = useSelector((state)=>state.user.value);
     const restaurantFromStore = useSelector((state)=>state.restaurants.value);
     const dispatch = useDispatch();
-    const [mobile, setMobile] = useState('7304431820');
+    const [mobile, setMobile] = useState('5559876543');
     const [password, setPassword] = useState('123456');
     const [loading, setLoading] = useState(false);
     const [bookings,setBookings] = useState();
@@ -35,8 +35,8 @@ const Profile = ()=>{
         axios.post(`${apiUrl}/api/login`,{mobile:mobile,password:password}).then((res)=>{
             setResponsetext(res.data);
             if(res.data.status===true){
-                dispatch(login(res.data.user));
-                localStorage.setItem('userData',JSON.stringify(res.data.user));
+                dispatch(login(res.data.result[0]));
+                localStorage.setItem('userData',JSON.stringify(res.data.result[0]));
                 setLoading(false);
             }else{
                 alert(res.data.message);
@@ -53,8 +53,8 @@ const Profile = ()=>{
         axios.post(`${apiUrl}/api/show-restaurants`,{id:user._id}).then((res)=>{
             console.log('restaurants from api',res);
             if(res.status===true){
-                dispatch(saveRestaurants(res.data.restaurants));
-                localStorage.setItem('restaurant',JSON.stringify(res.data.restaurants));
+                dispatch(saveRestaurants(res.data.result[0].restaurants));
+                localStorage.setItem('restaurant',JSON.stringify(res.data.result[0].restaurants));
                 setRestaurant(res.data.restaurants);
             }
         });

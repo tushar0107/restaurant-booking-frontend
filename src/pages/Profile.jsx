@@ -33,10 +33,10 @@ const Profile = ()=>{
     const submit = ()=>{
         setLoading(true);
         axios.post(`${apiUrl}/api/login`,{mobile:mobile,password:password}).then((res)=>{
-            setResponsetext(res.data);
             if(res.data.status===true){
-                dispatch(login(res.data.result[0]));
-                localStorage.setItem('userData',JSON.stringify(res.data.result[0]));
+                console.log(res.data.user);
+                dispatch(login(res.data.user));
+                localStorage.setItem('userData',JSON.stringify(res.data.user));
                 setLoading(false);
             }else{
                 alert(res.data.message);
@@ -61,14 +61,14 @@ const Profile = ()=>{
     }
 
     useEffect(()=>{
-            if(user){
-                setLoading(true);
-                axios.get(`${apiUrl}/api/get-bookings/${user._id}`).then((res)=>{
-                    console.log(res.data);
-                    setBookings(res.data.result);
-                    setLoading(false);
-                }).catch(err=>console.log(err));
-            }
+            // if(user){
+            //     setLoading(true);
+            //     axios.get(`${apiUrl}/api/get-bookings/${user._id}`).then((res)=>{
+            //         console.log(res.data);
+            //         setBookings(res.data.result);
+            //         setLoading(false);
+            //     }).catch(err=>console.log(err));
+            // }
 
     },[user]);
 
@@ -130,7 +130,6 @@ const Profile = ()=>{
             </div>}
             {user?.user_type==='owner'? <button className='secondary-btn' onClick={showRestaurants}>Show Restaurants</button> : null}
             {user?<button type='submit' className='secondary-btn' onClick={()=>{localStorage.clear();window.location.reload();}}>Logout</button>:null}
-            <span>{responsetext}</span>
             <Loader status={loading}/>
             <RestaurantForm show={openForm} formShow={setOpenForm} />
         </div>

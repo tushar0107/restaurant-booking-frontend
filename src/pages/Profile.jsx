@@ -13,7 +13,6 @@ import apiUrl from '../Vars';
 
 const Profile = ()=>{
     const user = useSelector((state)=>state.user.value);
-    const restaurantFromStore = useSelector((state)=>state.restaurants.value);
     const dispatch = useDispatch();
     const [mobile, setMobile] = useState('5559876543');
     const [password, setPassword] = useState('123456');
@@ -21,7 +20,6 @@ const Profile = ()=>{
     const [bookings,setBookings] = useState();
     const [restaurant,setRestaurant] = useState();
     const [openForm, setOpenForm] = useState(false);
-    const [responsetext,setResponsetext] = useState('');
 
     const handleMobile = (e)=>{
         setMobile(e.target.value);

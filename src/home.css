@@ -1,0 +1,68 @@
+/* home page styles */
+
+#banner-slider{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+	overflow-x: scroll;
+	width: 100%;
+	height: fit-content;
+	margin: 1rem auto;
+	scroll-snap-type: x mandatory;
+}
+#banner-slider .slide{
+	min-width: 100%;
+	scroll-snap-align: start;
+}
+#banner-slider a img{
+	width: 100%;
+	border-radius: 1rem;
+}
+#banner-slider::-webkit-scrollbar{
+	display: none;
+}
+section{
+	margin-bottom: 3rem;
+}
+#best-deals,
+#tasty-menu{
+	display: grid;
+	grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
+	gap: 1rem;
+}
+#best-deals img,
+#tasty-menu img{
+	width: 100%;
+	aspect-ratio: 1/1;
+	border-radius: 10px;
+}
+#new-restaurants{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 1rem;
+}
+#new-restaurants video{
+	display: block;
+    width: 100%;
+    max-width: 200px;
+}
+
+
+
+
+
+
+
+
+
+
+/* @keyframes scroll {
+	from{
+		transform: translateX(100%);
+	}
+	to{
+		transform: translateX(-800%);
+	}
+} */

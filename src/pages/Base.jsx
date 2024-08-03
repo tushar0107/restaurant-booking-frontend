@@ -5,6 +5,7 @@ import Home from "./Home";
 import Profile from "./Profile";
 import { Restaurant } from "./Restaurant";
 import { BookTable } from "./BookTable";
+import { Footer } from "../components/Footer";
 
 
 const Base = ()=>{
@@ -12,7 +13,7 @@ const Base = ()=>{
     return(
         <>
             <Header/>
-            <div id="main-section">
+            <main id="main-section">
                 <Routes>
                     <Route path='/' element={<Home/>}></Route>
                     <Route path='/search' element={<Search/>}></Route>
@@ -20,7 +21,8 @@ const Base = ()=>{
                     <Route path='/restaurant/:id' element={<Restaurant/>}></Route>
                     <Route path='/book-table/:id' element={<BookTable/>}></Route>
                 </Routes>
-            </div>
+            </main>
+            <Footer/>
         </>
     );
 };

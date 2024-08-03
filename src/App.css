@@ -18,12 +18,17 @@ button{
   padding: .8rem 1rem;
   border-radius: .5rem;
 }
+main#main-section {
+  width: min(800px, 100%);
+  margin: 0 auto;
+}
 /* all pages common */
 #home-page,
 #search-page,
 #book-table-page,
 #profile-container{
   padding: 0 1rem;
+  padding-bottom: 2rem;
 }
 
 /* loader component */
@@ -31,15 +36,15 @@ button{
   width: 100vw;
   height: 100vh;
   position: fixed;
-  z-index: 100;
+  z-index: 10000;
   inset: 0 0 0 0;
   background-color: #0000002f;
 }
 #loader-dialog{
-  width: min(200px,35%);
+  width: 150px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 1.5rem;
   background-color: white;
   box-shadow: 0 0 10px #9c9c9c;
@@ -73,6 +78,7 @@ button{
   justify-content: space-between;
   align-items: center;
   background-color: white;
+  box-shadow: 0 0 8px #000000b4;
 }
 #header .logo{
   padding: 1rem;
@@ -89,6 +95,33 @@ button{
   color: #333;
 }
 
+footer{
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 0 8px #00000048;
+}
+footer a{
+  font-size: 20px;
+  padding: .7rem;
+  color: salmon;
+  margin: .5rem auto;
+  transition: .3s ease;
+  border-radius: 10px;
+  width: 25px;
+  text-align: center;
+}
+footer a:hover{
+  background-color: rgb(228, 228, 228);
+}
+footer a:active{
+  background-color: salmon;
+  color: white;
+}
 /* home page  */
 
 /* profile page */

@@ -14,7 +14,7 @@ import apiUrl from '../Vars';
 const Profile = ()=>{
     const user = useSelector((state)=>state.user.value);
     const dispatch = useDispatch();
-    const [mobile, setMobile] = useState('5559876543');
+    const [mobile, setMobile] = useState('5551234567');
     const [password, setPassword] = useState('123456');
     const [loading, setLoading] = useState(false);
     const [bookings,setBookings] = useState();

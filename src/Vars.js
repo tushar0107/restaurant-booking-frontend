@@ -1,5 +1,4 @@
-const apiUrl = 'https://restaurant-booking-app-server.onrender.com'
-// const apiUrl = 'http://127.0.0.1:8626';
 
+const apiUrl = process.env.REACT_APP_APIURL;
 
 export default apiUrl;

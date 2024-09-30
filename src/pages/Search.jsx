@@ -61,7 +61,6 @@ const Search = ()=>{
         setLoading(true);
 
         axios.post(`${apiUrl}/api/restaurants`,{...formData}).then((res)=>{
-            console.log(res.data);
             if(res.data.length!==0){
                 setRestaurants(res.data.result);
             }

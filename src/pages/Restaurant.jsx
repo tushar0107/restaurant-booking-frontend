@@ -4,7 +4,8 @@ import { useParams } from 'react-router';
 import Loader from '../components/Loader';
 import { Link } from 'react-router-dom';
 import apiUrl from '../Vars';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircle } from "@fortawesome/free-solid-svg-icons";
 
 export const Restaurant = ()=>{
     const {id} = useParams();
@@ -13,16 +14,13 @@ export const Restaurant = ()=>{
     const [menu, setMenu] = useState();
     
     useEffect(()=>{
-        console.log(id);
         setIsLoading(true);
         axios.get(`${apiUrl}/api/get-restaurant/${id}`).then((res)=>{
-            console.log('restaurant: ',res.data);
             if(res.data.status){
                 setRestaurant(res.data.result);
             }
         }).then(()=>{
             axios.get(`${apiUrl}/api/menu/${id}`).then((res)=>{
-                console.log('menu: ',res.data);
                 if(res.data.status){
                     setMenu(res.data.result);
                 }
@@ -55,8 +53,9 @@ export const Restaurant = ()=>{
                                                 <img src={item.food_image_url?(apiUrl+'/'+item.food_image_url):'../../food-item.png'} alt="" />
                                             </div>
                                             <div className="menu-details">
-                                                <strong>{item.food_item}</strong><br />
-                                                <span>{item.food_desc.slice(0,50)}</span><br />
+                                                <strong>{item.food_item}</strong>
+                                                <FontAwesomeIcon icon={faCircle} style={{fontSize:'6px',color:item.type==='veg'?'green':'red',padding:'2px',marginLeft:'20px', border:'2px solid',borderColor:item.type==='veg'?'green':'red'}}/><br/>
+                                                <span>{item.food_desc.slice(0,80)+' ...'}</span><br />
                                                 <span>{item.price}/-</span>
                                             </div>
                                         </div>

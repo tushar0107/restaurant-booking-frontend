@@ -326,6 +326,7 @@ footer a:active{
   overflow-y: scroll;
   height: 50vh;
   padding: 0 .5rem;
+  padding-bottom: 4rem;
 }
   #menu-list::-webkit-scrollbar{
   width: 6px;
